@@ -57,12 +57,11 @@ pipeline {
         always {
             script {
                 BUILD_USER = getBuildUser()
-                branchName = sh(label: 'getBranchName', returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
             }
             echo "Sending output to slack"
             slackSend channel: '#jenkins-slack',
                 color: COLOR_MAP[currentBuild.currentResult],
-                message: "${currentBuild.currentResult}\n Job ' ${env.JOB_NAME} ' build ${env.BUILD_NUMBER} \nUSER: ${BUILD_USER}\n COMMIT ID : ${env.GIT_COMMIT}\n GIT BRANCH : ${branchName}"
+                message: "${currentBuild.currentResult}\n Job ' ${env.JOB_NAME} ' build ${env.BUILD_NUMBER} \nUSER: ${BUILD_USER}\n COMMIT ID : ${env.GIT_COMMIT}\n GIT BRANCH : ${env.GIT_BRANCH}"
             
         }
     }
