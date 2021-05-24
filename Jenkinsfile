@@ -3,7 +3,7 @@ def COLOR_MAP = [
     'FAILURE': 'danger',
     ]
 def getBuildUser(){
-    return currentBuild.rawBuild.getUserId()
+    return currentBuild.rawBuild.getCause.getUserId()
 }
 
 
